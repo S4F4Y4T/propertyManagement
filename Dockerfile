@@ -22,6 +22,7 @@ RUN apt-get update && apt-get install -y \
     libssl-dev \
     curl \
     cron \
+    supervisor \             
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install gd pdo_mysql zip exif
 
@@ -44,7 +45,8 @@ RUN composer install --no-dev --optimize-autoloader
 # Set permissions
 RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
 
-# Expose port
+# Expose port (for backend only, worker doesn’t need it)
 EXPOSE 9000
 
+# Default command for backend container
 CMD ["php-fpm"]

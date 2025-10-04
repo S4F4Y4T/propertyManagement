@@ -10,6 +10,9 @@
     cd propertyManagement
     cp .env.example .env
     docker compose build && docker compose up -d
+    docker compose exec -it backend bash
+    composer install
+    php artisan migrate --seed
 ```
 
 Set mail config from mail trap
