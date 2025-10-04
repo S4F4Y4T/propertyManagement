@@ -23,7 +23,7 @@ return new class extends Migration
             $table->decimal('total_amount', 10, 2)->default(0);
             $table->decimal('due_amount',10,2)->default(0);
             $table->decimal('paid_amount',10,2)->default(0);
-            $table->string('payment_status')->default(PaymentStatusEnum::unpaid->value);
+            $table->string('payment_status')->default(PaymentStatusEnum::UNPAID->value);
 
             $table->text('note')->nullable();
             
