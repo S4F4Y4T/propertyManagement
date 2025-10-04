@@ -7,7 +7,7 @@ services:
         restart: always
         networks:
             - pm_prod
-        command: php-fpm
+        command: sh -c "chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache && php-fpm"
         volumes:
             - .:/var/www
 
