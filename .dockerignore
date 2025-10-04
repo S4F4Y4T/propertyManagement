@@ -7,10 +7,6 @@ npm-debug.log
 yarn-error.log
 pnpm-debug.log
 
-# Ignore environment files (you can copy them in Dockerfile if needed)
-.env
-.env.*.backup
-
 # Ignore IDE/editor files
 .idea
 .vscode

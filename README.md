@@ -1,61 +1,159 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Property Management - Setup
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Prerequisites
+- Docker & Docker Compose installed
 
-## About Laravel
+## Quick Setup
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+```bash
+    git clone https://github.com/S4F4Y4T/propertyManagement.git
+    cd propertyManagement
+    cp .env.example .env
+    docker compose build && docker compose up -d
+```
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Set mail config from mail trap
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## API Testing
+Import the Postman collection and set environment variable
 
-## Learning Laravel
+# Functional Requirements
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Admin
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+* Authentication
+* Dashboard
+* Manage House Owners
+* Manage Tenants
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Owner (House Owner)
 
-## Laravel Sponsors
+* Authentication
+* Dashboard
+* View tenants
+* Manage Flats
+* Manage Bill Categories
+* Manage Bills
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+---
 
-### Premium Partners
+# API Collections
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+## Admin APIs
 
-## Contributing
+### Auth
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+* `POST /api/v1/admin/login`
+* `POST /api/v1/admin/logout`
+* `GET /api/v1/admin/profile`
 
-## Code of Conduct
+### Dashboard
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+* `GET /api/v1/admin/dashboard`
 
-## Security Vulnerabilities
+### House Owner Management
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+* `POST /api/v1/admin/house-owners` (create)
+* `GET /api/v1/admin/house-owners` (list)
+* `PUT /api/v1/admin/house-owners/{id}` (update)
+* `DELETE /api/v1/admin/house-owners/{id}` (delete)
 
-## License
+### Tenant Management
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+* `POST /api/v1/admin/tenants`
+* `GET /api/v1/admin/tenants`
+* `PUT /api/v1/admin/tenants/{id}`
+* `POST /api/v1/admin/tenants/{id}/assign` (assign tenant to building/flat)
+
+---
+
+## House Owner APIs
+
+### Auth
+
+* `POST /api/v1/owner/login`
+* `POST /api/v1/owner/logout`
+* `GET /api/v1/owner/profile`
+
+### Dashboard
+
+* `GET /api/v1/owner/dashboard`
+
+### Flat Management
+
+* `POST /api/v1/owner/flats`
+* `GET /api/v1/owner/flats`
+* `PUT /api/v1/owner/flats/{id}`
+* `DELETE /api/v1/owner/flats/{id}`
+
+### Bill Category Management
+
+* `POST /api/v1/owner/bill-categories`
+* `GET /api/v1/owner/bill-categories`
+* `PUT /api/v1/owner/bill-categories/{id}`
+* `DELETE /api/v1/owner/bill-categories/{id}`
+
+### Bill Management
+
+* `POST /api/v1/owner/flats/{flat}/bills`
+* `GET /api/v1/owner/bills`
+* `Patch /api/v1/owner/bills/{id}/pay`
+* `DELETE /api/v1/owner/bills/{id}`
+
+---
+
+?sort=-id&filter[name]=someone&includes=flat,bills
+
+- This is the query parameter format to sort, filter and load relational data into api, the allowed options are on app/Filters dir
+
+# Constraints
+
+* When **bill is created** → send notification to:
+
+  * Tenant (new bill available)
+
+* When **bill is paid** → send notification to:
+
+  * Tenant (confirmation of payment)
+
+---
+
+# Project Steps & Time Estimates
+
+1.  Laravel Project Setup with authentication and structure, Error Handling, Email Configure, Dockerize – 120m
+2.  Model Creation & Relations Definition, Migration – 40m
+3.  Create Routes & Postman Collections – 40m
+4.  Make Resources & Response Format, Middleware, Authorization – 40m
+5.  Controllers & Business Logic, Validation Rules, Filter, Sort, Eager Loading Structure – 210m
+6.  Finishing, Testing, Debugging – 60m
+9.  Documentation, Deployment & Git – 90m
+10. Debuggin + Buffer Time = 120m
+
+Estimated Time = 12 hours 0 minutes
+
+7.  Frontend Setup & Page Design – 180m
+8.  API Integration – 60m
+
+
+**Work Log:** Oct 3 – 1:30 AM - 4:30 AM - setup(error, response, structure), model, auth(postman)
+**Work Log:** Oct 3 – 09:10 AM - 12:30 AM - migration resource response, postman, route, controller setup
+**Work Log:** Oct 3 – 01:30 PM - 3:30 PM - filter, sort, eager load structure, validation rules, controller and service, manual testing, documentation
+**Work Log:** Oct 4 – 12:00 PM - 05:00 PM -controller, service, filter, validation for sass rules, manual testing, debugging
+**Work Log:** Oct 4 – 07:15 PM - 10:00 PM - documentation, git, docker, deploy, mail, observer
+
+**Total logged time = 16h 5m**
+
+Design Decisions:
+ - Used JWT for Authentication bcz its stateless
+ - Using Service Pattern only for complex logics and for clean code bcz any other pattern like repository would be overkill here
+ - Used Filter pattern to separate logic for sorting, eager loading, filtering so controller can be clean
+ - Used global scope with traits to manage saas data isolation
+ - Used observer for mail sending
+ - Used middleware for authorization
+ - Separated admin and owners by user type column in db to manage authentication easily based on the project size
+ - Dockerized for easy setup and deployment
+
+
+ I know ai is completely prohibited but still had to use ai to reformat the documentation and for some debugging because the deadline was very tight
+
+

@@ -1,21 +1,50 @@
-FROM php:8.2-fpm
+# Use official PHP image with necessary extensions
+FROM php:8.3-fpm
 
-RUN apt-get update && apt-get install -y \
-    git unzip curl libpng-dev libonig-dev libxml2-dev zip libzip-dev supervisor \
-    && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip
-
-COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
-
+# Set working directory
 WORKDIR /var/www
 
+# Install system dependencies and PHP extensions
+RUN apt-get update && apt-get install -y \
+    libpng-dev \
+    libjpeg-dev \
+    libfreetype6-dev \
+    libcurl4-openssl-dev \
+    libzip-dev \
+    libonig-dev \
+    libicu-dev \
+    libevent-dev \
+    libidn2-dev \
+    zip \
+    unzip \
+    git \
+    pkg-config \
+    libssl-dev \
+    curl \
+    cron \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install gd pdo_mysql zip exif
+
+# Install and enable PECL extensions separately
+RUN pecl install raphf && docker-php-ext-enable raphf
+RUN pecl install pecl_http && docker-php-ext-enable http
+
+# Clean up
+RUN rm -rf /var/lib/apt/lists/*
+
+# Install Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# Copy application code
 COPY . .
 
-RUN chown -R www-data:www-data /var/www && chmod -R 775 /var/www/storage /var/www/bootstrap/cache
+# Install dependencies
+RUN composer install --no-dev --optimize-autoloader
 
-RUN composer install --prefer-source --optimize-autoloader --no-dev --no-interaction
+# Set permissions
+RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
 
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-
+# Expose port
 EXPOSE 9000
 
-CMD ["/usr/bin/supervisord"]
+CMD ["php-fpm"]
