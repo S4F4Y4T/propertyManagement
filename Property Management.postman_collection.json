@@ -1,0 +1,1036 @@
+{
+	"info": {
+		"_postman_id": "1501322d-5768-4cb8-bf35-be29091ecd28",
+		"name": "Property Management",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "35401882",
+		"_collection_link": "https://skarbol-dev-team.postman.co/workspace/Skarbol-Dev-Team-Workspace~7e10bb72-6c2c-49f1-900c-399abf7575c6/collection/35401882-1501322d-5768-4cb8-bf35-be29091ecd28?action=share&source=collection_link&creator=35401882"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"owner@example.com\",\n    \"password\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{propertyBase}}/auth/login"
+					},
+					"response": []
+				},
+				{
+					"name": "Profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{propertyBase}}/auth/me"
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDEvYXBpL3YxL2F1dGgvbG9naW4iLCJpYXQiOjE3NTk0NDQwMTYsImV4cCI6MTc1OTQ0NzYxNiwibmJmIjoxNzU5NDQ0MDE2LCJqdGkiOiJrTkVKT3ZFbFFYc1dxalNaIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.0LJmpwMc4lyNE89fJg9NFxkUQwxmnT9iw-UvGxI1FUE"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"url": "{{propertyBase}}/auth/logout"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Tenant",
+					"item": [
+						{
+							"name": "Get Tenant List",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDEvYXBpL3YxL2F1dGgvbG9naW4iLCJpYXQiOjE3NTk1NjY3ODIsImV4cCI6MTc1OTU3MDM4MiwibmJmIjoxNzU5NTY2NzgyLCJqdGkiOiJLVE1ZMFE3V292aXJhanFnIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.fdfvzs8EuhBB1ftccFKH8qtbKGewGse_Qqf883BGEsY"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{propertyBase}}/admin/tenants?sort=-id&filter[name]=someone&includes=flat,bills",
+									"host": [
+										"{{propertyBase}}"
+									],
+									"path": [
+										"admin",
+										"tenants"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "show",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "sort",
+											"value": "-id"
+										},
+										{
+											"key": "filter[name]",
+											"value": "someone"
+										},
+										{
+											"key": "includes",
+											"value": "flat,bills"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Tenant",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{token}}"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{propertyBase}}/admin/tenants/:id",
+									"host": [
+										"{{propertyBase}}"
+									],
+									"path": [
+										"admin",
+										"tenants",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Tenant",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDEvYXBpL3YxL2F1dGgvbG9naW4iLCJpYXQiOjE3NTk1NjY3ODIsImV4cCI6MTc1OTU3MDM4MiwibmJmIjoxNzU5NTY2NzgyLCJqdGkiOiJLVE1ZMFE3V292aXJhanFnIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.fdfvzs8EuhBB1ftccFKH8qtbKGewGse_Qqf883BGEsY"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Someone\",\n    \"contact_number\": \"01818181815\",\n    \"email\": \"some1@example.com\",\n    \"flat_id\": 2,\n    \"owner_id\": 3\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{propertyBase}}/admin/tenants"
+							},
+							"response": []
+						},
+						{
+							"name": "Update Tenant",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{token}}"
+									}
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Someone\",\n    \"contact_number\": \"01818181818\",\n    \"email\": \"someone@example.com\",\n    \"flat_id\": 2\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{propertyBase}}/admin/tenants/:id",
+									"host": [
+										"{{propertyBase}}"
+									],
+									"path": [
+										"admin",
+										"tenants",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Tenants",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDEvYXBpL3YxL2F1dGgvbG9naW4iLCJpYXQiOjE3NTk0NDQwMTYsImV4cCI6MTc1OTQ0NzYxNiwibmJmIjoxNzU5NDQ0MDE2LCJqdGkiOiJrTkVKT3ZFbFFYc1dxalNaIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.0LJmpwMc4lyNE89fJg9NFxkUQwxmnT9iw-UvGxI1FUE"
+									}
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{propertyBase}}/admin/tenants/:id",
+									"host": [
+										"{{propertyBase}}"
+									],
+									"path": [
+										"admin",
+										"tenants",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "House Owner",
+					"item": [
+						{
+							"name": "Get House Owner List",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{token}}"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{propertyBase}}/admin/house-owners",
+									"host": [
+										"{{propertyBase}}"
+									],
+									"path": [
+										"admin",
+										"house-owners"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "show",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "sort",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "filter[search]",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "includes",
+											"value": "",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Single House Owner",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{token}}"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{propertyBase}}/admin/house-owners/:id",
+									"host": [
+										"{{propertyBase}}"
+									],
+									"path": [
+										"admin",
+										"house-owners",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create House Owner",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{token}}"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john.doe@example.com\",\n  \"password\": \"password\",\n  \"building\": {\n    \"name\": \"Green Residency\",\n    \"address\": \"45/B, Dhanmondi, Dhaka\",\n    \"note\": \"\"\n  }\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{propertyBase}}/admin/house-owners"
+							},
+							"response": []
+						},
+						{
+							"name": "Update House Owner",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{token}}"
+									}
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john.doe@example.com\",\n  \"password\": \"password\",\n  \"building\": {\n    \"name\": \"Green Residency\",\n    \"address\": \"45/B, Dhanmondi, Dhaka\",\n    \"note\": \"\"\n  }\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{propertyBase}}/admin/house-owners/:id",
+									"host": [
+										"{{propertyBase}}"
+									],
+									"path": [
+										"admin",
+										"house-owners",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete House Owner",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDEvYXBpL3YxL2F1dGgvbG9naW4iLCJpYXQiOjE3NTk0NDQwMTYsImV4cCI6MTc1OTQ0NzYxNiwibmJmIjoxNzU5NDQ0MDE2LCJqdGkiOiJrTkVKT3ZFbFFYc1dxalNaIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.0LJmpwMc4lyNE89fJg9NFxkUQwxmnT9iw-UvGxI1FUE"
+									}
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{propertyBase}}/admin/house-owners/:id",
+									"host": [
+										"{{propertyBase}}"
+									],
+									"path": [
+										"admin",
+										"house-owners",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Admin Dashboard",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{propertyBase}}/admin/dashboard"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "House Owner",
+			"item": [
+				{
+					"name": "Flat",
+					"item": [
+						{
+							"name": "Get Flat List",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{token}}"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{propertyBase}}/owner/flats?includes=building,tenant",
+									"host": [
+										"{{propertyBase}}"
+									],
+									"path": [
+										"owner",
+										"flats"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "show",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "sort",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "filter[search]",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "includes",
+											"value": "building,tenant"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Single Flats",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{token}}"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{propertyBase}}/owner/flats/:id",
+									"host": [
+										"{{propertyBase}}"
+									],
+									"path": [
+										"owner",
+										"flats",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Flat",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{token}}"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"flat_number\": 12,\n  \"note\": \"\",\n  \"rooms\": 1,\n  \"floor\": 1\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{propertyBase}}/owner/flats"
+							},
+							"response": []
+						},
+						{
+							"name": "Update Flats",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{token}}"
+									}
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"flat_number\": 1,\n  \"note\": \"\",\n  \"rooms\": 1,\n  \"floor\": 1\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{propertyBase}}/owner/flats/:id",
+									"host": [
+										"{{propertyBase}}"
+									],
+									"path": [
+										"owner",
+										"flats",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete House Owner",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDEvYXBpL3YxL2F1dGgvbG9naW4iLCJpYXQiOjE3NTk0NDQwMTYsImV4cCI6MTc1OTQ0NzYxNiwibmJmIjoxNzU5NDQ0MDE2LCJqdGkiOiJrTkVKT3ZFbFFYc1dxalNaIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.0LJmpwMc4lyNE89fJg9NFxkUQwxmnT9iw-UvGxI1FUE"
+									}
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{propertyBase}}/admin/flats/:id",
+									"host": [
+										"{{propertyBase}}"
+									],
+									"path": [
+										"admin",
+										"flats",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Bill Category",
+					"item": [
+						{
+							"name": "Get Bill Category List",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{propertyBase}}/admin/bill-categories",
+									"host": [
+										"{{propertyBase}}"
+									],
+									"path": [
+										"admin",
+										"bill-categories"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "show",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "sort",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "filter[search]",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "includes",
+											"value": "",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Single Bill Category",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDEvYXBpL3YxL2F1dGgvbG9naW4iLCJpYXQiOjE3NTk0NDQwMTYsImV4cCI6MTc1OTQ0NzYxNiwibmJmIjoxNzU5NDQ0MDE2LCJqdGkiOiJrTkVKT3ZFbFFYc1dxalNaIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.0LJmpwMc4lyNE89fJg9NFxkUQwxmnT9iw-UvGxI1FUE"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{propertyBase}}/admin/bill-categories/:id",
+									"host": [
+										"{{propertyBase}}"
+									],
+									"path": [
+										"admin",
+										"bill-categories",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Bill Category",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{token}}"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"Water\",\n  \"note\": \"\"\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{propertyBase}}/owner/bill-categories"
+							},
+							"response": []
+						},
+						{
+							"name": "Update Bill Category",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDEvYXBpL3YxL2F1dGgvbG9naW4iLCJpYXQiOjE3NTk0NDQwMTYsImV4cCI6MTc1OTQ0NzYxNiwibmJmIjoxNzU5NDQ0MDE2LCJqdGkiOiJrTkVKT3ZFbFFYc1dxalNaIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.0LJmpwMc4lyNE89fJg9NFxkUQwxmnT9iw-UvGxI1FUE"
+									}
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"\",\n  \"note\": \"\"\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{propertyBase}}/admin/bill-categories/:id",
+									"host": [
+										"{{propertyBase}}"
+									],
+									"path": [
+										"admin",
+										"bill-categories",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Bill Category",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDEvYXBpL3YxL2F1dGgvbG9naW4iLCJpYXQiOjE3NTk0NDQwMTYsImV4cCI6MTc1OTQ0NzYxNiwibmJmIjoxNzU5NDQ0MDE2LCJqdGkiOiJrTkVKT3ZFbFFYc1dxalNaIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.0LJmpwMc4lyNE89fJg9NFxkUQwxmnT9iw-UvGxI1FUE"
+									}
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{propertyBase}}/admin/bill-categories/:id",
+									"host": [
+										"{{propertyBase}}"
+									],
+									"path": [
+										"admin",
+										"bill-categories",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Bill",
+					"item": [
+						{
+							"name": "Get All Bill",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{token}}"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{propertyBase}}/owner/bills?includes=category",
+									"host": [
+										"{{propertyBase}}"
+									],
+									"path": [
+										"owner",
+										"bills"
+									],
+									"query": [
+										{
+											"key": "includes",
+											"value": "category"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Single Bill",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{token}}"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{propertyBase}}/owner/bills/:id?includes=flat",
+									"host": [
+										"{{propertyBase}}"
+									],
+									"path": [
+										"owner",
+										"bills",
+										":id"
+									],
+									"query": [
+										{
+											"key": "includes",
+											"value": "flat"
+										}
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Bill",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{token}}"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"bills\": [\n    {\n      \"month\": \"2025-10\",\n      \"total_amount\": 15000.00,\n      \"bill_category_id\": 1\n    },\n    {\n      \"month\": \"2025-10\",\n      \"total_amount\": 15000.00,\n      \"bill_category_id\": 1\n    },\n    {\n      \"month\": \"2025-10\",\n      \"total_amount\": 15000.00,\n      \"bill_category_id\": 1\n    }\n  ]\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{propertyBase}}/owner/flats/:flat-id/bills",
+									"host": [
+										"{{propertyBase}}"
+									],
+									"path": [
+										"owner",
+										"flats",
+										":flat-id",
+										"bills"
+									],
+									"variable": [
+										{
+											"key": "flat-id",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Bill",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{token}}"
+									}
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{propertyBase}}/owner/bills/:id",
+									"host": [
+										"{{propertyBase}}"
+									],
+									"path": [
+										"owner",
+										"bills",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Pay Bill",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{token}}"
+									}
+								},
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "{{propertyBase}}/owner/bills/:id/pay",
+									"host": [
+										"{{propertyBase}}"
+									],
+									"path": [
+										"owner",
+										"bills",
+										":id",
+										"pay"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Tenant",
+					"item": [
+						{
+							"name": "Get Owners Tenant",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{token}}"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"url": "{{propertyBase}}/owner/tenants"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Owner Dashboard",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{propertyBase}}/owner/dashboard"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
