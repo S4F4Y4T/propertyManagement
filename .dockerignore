@@ -1,0 +1,25 @@
+# Ignore node_modules and vendor (they'll be installed inside the container)
+node_modules
+vendor
+
+# Ignore npm / yarn logs
+npm-debug.log
+yarn-error.log
+pnpm-debug.log
+
+# Ignore environment files (you can copy them in Dockerfile if needed)
+.env
+.env.*.backup
+
+# Ignore IDE/editor files
+.idea
+.vscode
+*.sublime-project
+*.sublime-workspace
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore git
+.git
