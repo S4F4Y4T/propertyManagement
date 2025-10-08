@@ -183,13 +183,14 @@ Import the Postman collection and set environment variable
 
 
 Design Decisions:
- - Used JWT for Authentication bcz its stateless
- - Using Service Pattern only for complex logics and for clean code bcz any other pattern like repository would be overkill here
+ - Used JWT for Authentication bcz its stateless, it could be better with refresh token based on the project size and deadline
+ - Using Service Pattern only to isolate complex logics from controller
  - Used Filter pattern to separate logic for sorting, eager loading, filtering so controller can be clean
+ - Used single db for multi tenancy bcz it less complex but effective
  - Used global scope with traits to manage saas data isolation
  - Dockerized for easy setup and deployment
  
  - Using My Previous project's frontend structure which i built from scratch bcz of time complexity
- - I know ai is completely prohibited but still had to use ai to reformat the documentation and for few debugging
+ - I know ai is completely prohibited but still had to use ai to reformat the documentation and for very few debugging for docker
 
 
