@@ -12,6 +12,7 @@ class OwnerMiddleware
 
     public function handle($request, Closure $next)
     {
+        info($request->user());
         if($request->user()->role !== RoleEnum::OWNER->value) {
             return self::error('Unauthorize Access.', 403);
         }

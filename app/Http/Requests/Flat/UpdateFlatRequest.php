@@ -22,7 +22,7 @@ class UpdateFlatRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'flat_number' => 'required|integer|min:1|unique:flats,flat_number,' . $this->flat->id,
+            'flat_number' => 'required|min:1|unique:flats,flat_number,' . $this->flat->id,
             'rooms' => 'required|integer|min:1',
             'floor' => 'required|integer|min:0',
             'note' => 'nullable|string|max:500',

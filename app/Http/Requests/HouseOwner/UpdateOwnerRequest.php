@@ -37,7 +37,7 @@ class UpdateOwnerRequest extends FormRequest
     public function validatedData()
     {
         $validatedData = parent::validated();
-        if($validatedData['password']){
+        if(!empty($validatedData['password'])){
              $validatedData['password'] = Hash::make($validatedData['password']);
         }
         return $validatedData;

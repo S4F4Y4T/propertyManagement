@@ -17,7 +17,7 @@ class TenantService
         if (!empty($data['flat_id'])) {
             $flat = Flat::findOrFail($data['flat_id']);
 
-            if ($flat->owner_id !== $tenant->owner_id) {
+            if ($flat->owner_id != $data['owner_id']) {
                 throw ValidationException::withMessages([
                     'flat_id' => ['The selected flat does not belong to the tenant\'s owner.']
                 ]);

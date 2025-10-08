@@ -19,7 +19,8 @@ class AuthenticationController
 
         return self::success(message: 'authentication successful',data:[
                 'access_token' => $token,
-                'token_type' => 'bearer',
+                'token_type' => 'bearerx',
+                'user' => auth()->user(),
                 'expires_in' => auth()->factory()->getTTL() * 60,
         ]);    
     }

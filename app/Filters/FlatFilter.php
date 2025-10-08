@@ -8,7 +8,7 @@ class FlatFilter extends QueryFilter
 
     protected array $allowedIncludes = ['building', 'tenant', 'bills'];
 
-    public function flat_number($value): void
+    public function search($value): void
     {
         $this->builder->where('flat_number', $value);
     }

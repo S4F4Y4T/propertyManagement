@@ -8,7 +8,7 @@ class TenantFilter extends QueryFilter
 
     protected array $allowedIncludes = ['flat', 'bills'];
 
-    public function name($value): void
+    public function search($value): void
     {
         $this->builder->where('name', 'like', '%' . $value . '%');
     }

@@ -10,6 +10,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Builder;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use App\Filters\QueryFilter;
+use App\Builders\BaseQueryBuilder;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -92,5 +93,10 @@ class User extends Authenticatable implements JWTSubject
     public function scopeOwners($query)
     {
         return $query->where('role', RoleEnum::OWNER->value);
+    }
+
+    public function newEloquentBuilder($query)
+    {
+        return new BaseQueryBuilder($query);
     }
 }

@@ -7,6 +7,7 @@ use App\Filters\UserFilter;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\HouseOwner\CreateOwnerRequest;
 use App\Http\Requests\HouseOwner\UpdateOwnerRequest;
+use App\Http\Resources\FlatResource;
 use App\Http\Resources\OwnerResource;
 use App\Models\User;
 
@@ -21,6 +22,15 @@ class OwnerController extends Controller
             'total_unpaid_bills' => auth()->user()->building->bills()->where('payment_status', PaymentStatusEnum::UNPAID->value)->sum('total_amount'),
             'total_paid_bills' => auth()->user()->building->bills()->where('payment_status', PaymentStatusEnum::PAID->value)->sum('total_amount'),
         ];
+    }
+
+    public function flats(User $house_owner)
+    {
+        info($house_owner);
+        $house_owner->load('building.flats');
+        return FlatResource::collection(
+            $house_owner->building?->flats ?? collect()
+        );
     }
 
     public function index(UserFilter $ownerFilter)

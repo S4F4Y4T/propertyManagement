@@ -11,7 +11,7 @@ class UserFilter extends QueryFilter
 
     public function search($search): void
     {
-         $$this->builder->where(function ($q) use ($search) {
+         $this->builder->where(function ($q) use ($search) {
             $q->where('name', 'like', '%' . $search . '%')
                 ->orWhere('email', 'like', '%' . $search . '%');
         });

@@ -137,12 +137,21 @@ Estimated Time = 12 hours 0 minutes
 7.  Frontend Setup & Page Design – 180m
 8.  API Integration – 60m
 
-
+Backend:-
 **Work Log:** Oct 3 – 1:30 AM - 4:30 AM - setup(error, response, structure), model, auth(postman)
 **Work Log:** Oct 3 – 09:10 AM - 12:30 AM - migration resource response, postman, route, controller setup
 **Work Log:** Oct 3 – 01:30 PM - 3:30 PM - filter, sort, eager load structure, validation rules, controller and service, manual testing, documentation
 **Work Log:** Oct 4 – 12:00 PM - 05:00 PM -controller, service, filter, validation for sass rules, manual testing, debugging
-**Work Log:** Oct 4 – 07:15 PM - 10:00 PM - documentation, git, docker, deploy, mail, observer
+**Work Log:** Oct 4 – 07:15 PM - 11:00 PM - documentation, git, docker, deploy, mail, observer, debugging
+
+Frontend:-
+**Work Log:** Oct 5 – 02:30 AM - 03:40 AM - setup, auth
+**Work Log:** Oct 5 – 10:00 PM - 11:10 PM - house owner crud
+**Work Log:** Oct 6 – 06:10 AM - 09:30 PM - tenant crud, admin dashboard
+**Work Log:** Oct 6 – 01:40 PM - 02:00 PM - owner dashboard, tenant update issue fix
+**Work Log:** Oct 7 – 01:30 AM - 2:30 AM - flat, update structure
+**Work Log:** Oct 7 – 06:50 AM - 8:00 AM - Bill category, tenant list for owner, validation error handling
+**Work Log:** Oct 8 – 07:16 AM -  AM - Bill, pay, git, deployment
 
 **Total logged time = 16h 5m**
 
@@ -155,8 +164,8 @@ Design Decisions:
  - Used middleware for authorization
  - Separated admin and owners by user type column in db to manage authentication easily based on the project size
  - Dockerized for easy setup and deployment
-
-
- I know ai is completely prohibited but still had to use ai to reformat the documentation and for some debugging because the deadline was very tight
+ 
+ - Using My Previous project's frontend structure which i built from scratch bcz of time complexity
+ - I know ai is completely prohibited but still had to use ai to reformat the documentation and for some debugging because the deadline was very tight
 
 

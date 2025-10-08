@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Flat;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\ValidationException;
 
 class CreateFlatRequest extends FormRequest
 {
@@ -22,17 +23,28 @@ class CreateFlatRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'flat_number' => 'required|integer|min:1|unique:flats,flat_number',
+            'flat_number' => 'required|min:1|unique:flats,flat_number',
             'rooms' => 'required|integer|min:1',
             'floor' => 'required|integer|min:0',
             'note' => 'nullable|string|max:500',
         ];
     }
 
-    public function validatedData() {
+    public function validatedData(): array
+    {
         $data = parent::validated();
 
-        $data['building_id'] = auth()->user()->building?->id;
+        $buildingId = auth()->user()->building?->id;
+
+        info($buildingId);
+
+        if (!$buildingId) {
+            throw ValidationException::withMessages([
+                'building_id' => ['Owner doesnt have any building yet.'],
+            ]);
+        }
+
+        $data['building_id'] = $buildingId;
 
         return $data;
     }
