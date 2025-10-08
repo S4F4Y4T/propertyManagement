@@ -17,6 +17,18 @@
 
 Set mail config from mail trap
 
+## Credentials
+
+URL:- http://142.171.47.138:6001
+
+Admin:
+  admin@example.com
+  password
+
+Owner:
+  rizwan@gmail.com
+  password
+
 ## API Testing
 Import the Postman collection and set environment variable
 
@@ -132,40 +144,45 @@ Import the Postman collection and set environment variable
 9.  Documentation, Deployment & Git – 90m
 10. Debuggin + Buffer Time = 120m
 
-Estimated Time = 12 hours 0 minutes
+Estimated Time =  12hours  0minutes
 
-7.  Frontend Setup & Page Design – 180m
+7.  Frontend Setup & Page Design & Interactive – 240m
 8.  API Integration – 60m
+9.  Buffer Time – 120m
+
+Estimated Time =  7 hours
+
+##Work Logs
 
 Backend:-
 **Work Log:** Oct 3 – 1:30 AM - 4:30 AM - setup(error, response, structure), model, auth(postman)
 **Work Log:** Oct 3 – 09:10 AM - 12:30 AM - migration resource response, postman, route, controller setup
 **Work Log:** Oct 3 – 01:30 PM - 3:30 PM - filter, sort, eager load structure, validation rules, controller and service, manual testing, documentation
 **Work Log:** Oct 4 – 12:00 PM - 05:00 PM -controller, service, filter, validation for sass rules, manual testing, debugging
-**Work Log:** Oct 4 – 07:15 PM - 11:00 PM - documentation, git, docker, deploy, mail, observer, debugging
+**Work Log:** Oct 4 – 07:15 PM - 10:00 PM - documentation, git, docker, deploy, mail, observer, debugging
+
+**Total Backend Logged Time = 16h 5m**
 
 Frontend:-
 **Work Log:** Oct 5 – 02:30 AM - 03:40 AM - setup, auth
 **Work Log:** Oct 5 – 10:00 PM - 11:10 PM - house owner crud
-**Work Log:** Oct 6 – 06:10 AM - 09:30 PM - tenant crud, admin dashboard
+**Work Log:** Oct 6 – 06:10 AM - 08:30 AM - tenant crud, admin dashboard
 **Work Log:** Oct 6 – 01:40 PM - 02:00 PM - owner dashboard, tenant update issue fix
 **Work Log:** Oct 7 – 01:30 AM - 2:30 AM - flat, update structure
 **Work Log:** Oct 7 – 06:50 AM - 8:00 AM - Bill category, tenant list for owner, validation error handling
-**Work Log:** Oct 8 – 07:16 AM -  AM - Bill, pay, git, deployment
+**Work Log:** Oct 8 – 07:16 AM - 8:40 AM - Bill, pay, git
+**Work Log:** Oct 8 – 09:00 AM -  AM - deployment
 
-**Total logged time = 16h 5m**
+**Total Frontend Logged Time = 8h 34m**
 
 Design Decisions:
  - Used JWT for Authentication bcz its stateless
  - Using Service Pattern only for complex logics and for clean code bcz any other pattern like repository would be overkill here
  - Used Filter pattern to separate logic for sorting, eager loading, filtering so controller can be clean
  - Used global scope with traits to manage saas data isolation
- - Used observer for mail sending
- - Used middleware for authorization
- - Separated admin and owners by user type column in db to manage authentication easily based on the project size
  - Dockerized for easy setup and deployment
  
  - Using My Previous project's frontend structure which i built from scratch bcz of time complexity
- - I know ai is completely prohibited but still had to use ai to reformat the documentation and for some debugging because the deadline was very tight
+ - I know ai is completely prohibited but still had to use ai to reformat the documentation and for few debugging
 
 

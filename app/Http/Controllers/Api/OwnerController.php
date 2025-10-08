@@ -26,7 +26,6 @@ class OwnerController extends Controller
 
     public function flats(User $house_owner)
     {
-        info($house_owner);
         $house_owner->load('building.flats');
         return FlatResource::collection(
             $house_owner->building?->flats ?? collect()

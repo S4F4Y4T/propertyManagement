@@ -36,8 +36,6 @@ class CreateFlatRequest extends FormRequest
 
         $buildingId = auth()->user()->building?->id;
 
-        info($buildingId);
-
         if (!$buildingId) {
             throw ValidationException::withMessages([
                 'building_id' => ['Owner doesnt have any building yet.'],
