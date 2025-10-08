@@ -133,47 +133,54 @@ Import the Postman collection and set environment variable
 
 ---
 
-# Project Steps & Time Estimates
+## Project Steps & Time Estimates
 
-1.  Laravel Project Setup with authentication and structure, Error Handling, Email Configure, Dockerize – 120m
-2.  Model Creation & Relations Definition, Migration – 40m
-3.  Create Routes & Postman Collections – 40m
-4.  Make Resources & Response Format, Middleware, Authorization – 40m
-5.  Controllers & Business Logic, Validation Rules, Filter, Sort, Eager Loading Structure – 210m
-6.  Finishing, Testing, Debugging – 60m
-9.  Documentation, Deployment & Git – 90m
-10. Debuggin + Buffer Time = 120m
+### Backend
+| Task | Estimated Time |
+|------|----------------|
+| Setup, authentication, error handling, Docker | 2h |
+| Models & migrations | 40m |
+| Routes & Postman collections | 40m |
+| Resources, middleware, authorization | 40m |
+| Controllers, validation, filter/sort/eager loading | 3.5h |
+| Finishing, testing | 1h |
+| Documentation, deployment, Git | 1.5h |
+| Debugging & buffer | 2h |
 
-Estimated Time =  12hours  0minutes
+**Total Estimated:** 12h  
+**Logged Time:** 16h 5m
 
-7.  Frontend Setup & Page Design & Interactive – 240m
-8.  API Integration – 60m
-9.  Buffer Time – 120m
+### Frontend
+| Task | Estimated Time |
+|------|----------------|
+| Setup & page design | 4h |
+| API integration | 1h |
+| Buffer | 2h |
 
-Estimated Time =  7 hours
+**Total Estimated:** 7h  
+**Logged Time:** 8h 34m
 
-##Work Logs
+---
 
-Backend:-
-**Work Log:** Oct 3 – 1:30 AM - 4:30 AM - setup(error, response, structure), model, auth(postman)
-**Work Log:** Oct 3 – 09:10 AM - 12:30 AM - migration resource response, postman, route, controller setup
-**Work Log:** Oct 3 – 01:30 PM - 3:30 PM - filter, sort, eager load structure, validation rules, controller and service, manual testing, documentation
-**Work Log:** Oct 4 – 12:00 PM - 05:00 PM -controller, service, filter, validation for sass rules, manual testing, debugging
-**Work Log:** Oct 4 – 07:15 PM - 10:00 PM - documentation, git, docker, deploy, mail, observer, debugging
+## Work Logs
 
-**Total Backend Logged Time = 16h 5m**
+### Backend
+- **Oct 3** – 1:30 AM - 4:30 AM: Setup, models, auth, Postman  
+- **Oct 3** – 9:10 AM - 12:30 PM: Migration, resource response, routes, controllers  
+- **Oct 3** – 1:30 PM - 3:30 PM: Filter, sort, eager loading, validation, services  
+- **Oct 4** – 12:00 PM - 5:00 PM: Controller, services, validation, testing, debugging  
+- **Oct 4** – 7:15 PM - 10:00 PM: Documentation, git, Docker, deploy, mail, observer, debugging  
 
-Frontend:-
-**Work Log:** Oct 5 – 02:30 AM - 03:40 AM - setup, auth
-**Work Log:** Oct 5 – 10:00 PM - 11:10 PM - house owner crud
-**Work Log:** Oct 6 – 06:10 AM - 08:30 AM - tenant crud, admin dashboard
-**Work Log:** Oct 6 – 01:40 PM - 02:00 PM - owner dashboard, tenant update issue fix
-**Work Log:** Oct 7 – 01:30 AM - 2:30 AM - flat, update structure
-**Work Log:** Oct 7 – 06:50 AM - 8:00 AM - Bill category, tenant list for owner, validation error handling
-**Work Log:** Oct 8 – 07:16 AM - 8:40 AM - Bill, pay, git
-**Work Log:** Oct 8 – 09:00 AM -  AM - deployment
+### Frontend
+- **Oct 5** – 2:30 AM - 3:40 AM: Setup, auth  
+- **Oct 5** – 10:00 PM - 11:10 PM: House owner CRUD  
+- **Oct 6** – 6:10 AM - 8:30 AM: Tenant CRUD, admin dashboard  
+- **Oct 6** – 1:40 PM - 2:00 PM: Owner dashboard, tenant update fix  
+- **Oct 7** – 1:30 AM - 2:30 AM: Flats update  
+- **Oct 7** – 6:50 AM - 8:00 AM: Bill category, tenant list, validation error handling  
+- **Oct 8** – 7:16 AM - 8:40 AM: Bill, pay, git  
+- **Oct 8** – 9:00 AM - 10:00 AM: Deployment, documentation, hotfix, full flow test
 
-**Total Frontend Logged Time = 8h 34m**
 
 Design Decisions:
  - Used JWT for Authentication bcz its stateless
